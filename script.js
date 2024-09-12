@@ -48,3 +48,66 @@ const photos = [
         type: 'animals',
     },
 ];
+
+
+// Homework
+let gallerySpace = document.querySelector("#gallery");
+
+let allButton = document.querySelector("#all");
+let natureButton = document.querySelector("#nature");
+let cityButton = document.querySelector("#city");
+let animalButton = document.querySelector("#animals");
+
+let loadImage = document.querySelector("#loadMore");
+let limit = 0;
+
+const images = (imgType) => {
+
+    let filteredImages = [];
+    gallerySpace.innerHTML = "";
+
+    if (imgType == "all"){
+        filteredImages = photos;
+    }
+    else{
+        photos.forEach((img) => {
+            if (img.type == imgType){
+                filteredImages.push(img);
+            }  
+        });
+    }
+    
+    if(filteredImages.length > 6){
+        for (let img = 0; img < 6; img++){
+            gallerySpace.innerHTML += `<img src=${filteredImages[img].url}>`;
+        }
+        loadImage.addEventListener("click", () => {
+            if (limit < filteredImages.length){
+                limit += 6;
+                for (let img = 0 + limit; img < 6 + limit; img++){
+                    gallerySpace.innerHTML += `<img src=${filteredImages[img].url}>`;
+                }
+            } 
+        });
+    }else{
+        filteredImages.forEach((imgs) => {
+            gallerySpace.innerHTML += `<img src=${imgs.url}>`;
+        });
+    }
+}
+
+allButton.addEventListener("click", () => {
+    images("all");
+});
+
+natureButton.addEventListener("click", () => {
+    images("nature");
+});
+
+cityButton.addEventListener("click", () => {
+    images("city");
+});
+
+animalButton.addEventListener("click", () => {
+    images("animals");
+});
