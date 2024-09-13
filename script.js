@@ -50,11 +50,22 @@ const photos = [
 ];
 
 //select gallery
-const gallery = document.getElementById('gallery');
+function displayPhotos(type){
+    const gallery = document.getElementById('gallery');
 
-//loop
-photos.forEach(photo =>{
+    type.forEach(photo =>{
     const img = document.createElement('img');
     img.src = photo.url;
     gallery.appendChild(img);
 });
+}
+
+//filter by type
+const nature = photos.filter(photo => photo.type === 'nature');
+const city = photos.filter(photo => photo.type === 'city');
+const animals = photos.filter(photo => photo.type === 'animals');
+
+displayPhotos(nature);
+displayPhotos(city);
+displayPhotos(animals);
+
