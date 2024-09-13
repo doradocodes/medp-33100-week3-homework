@@ -50,14 +50,31 @@ const photos = [
 ];
 
 
+
+function displayPhotos(){
+    let photoIndex = 0;
+    const gallery = document.getElementById('gallery');
+    gallery.innerHTML = '';
+    const display = photos.slice(photoIndex, photoIndex + 6);
+
+    display.forEach(photo =>{
+        const img = document.createElement('img');
+        img.src = photo.url;
+        gallery.appendChild(img);
+    })
+
+    photoIndex += 6;
+}
+
+
 //filter by type
 function displayFilteredPhotos(type){
     const gallery = document.getElementById('gallery');
     gallery.innerHTML = '';
     type.forEach(photo =>{
-    const img = document.createElement('img');
-    img.src = photo.url;
-    gallery.appendChild(img);
+        const img = document.createElement('img');
+        img.src = photo.url;
+        gallery.appendChild(img);
     });
 }
 
@@ -65,7 +82,8 @@ const nature = photos.filter(photo => photo.type === 'nature');
 const city = photos.filter(photo => photo.type === 'city');
 const animals = photos.filter(photo => photo.type === 'animals');
 
-
+displayPhotos();
+document.getElementById('all').addEventListener('click', () => displayPhotos());
 document.getElementById('nature').addEventListener('click', () => displayFilteredPhotos(nature));
 document.getElementById('city').addEventListener('click', () => displayFilteredPhotos(city));
 document.getElementById('animals').addEventListener('click', () => displayFilteredPhotos(animals));
