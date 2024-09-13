@@ -49,4 +49,12 @@ const photos = [
     },
 ];
 
-console.log('hello');
+//select gallery
+const gallery = document.getElementById('gallery');
+
+//loop
+photos.forEach(photo =>{
+    const img = document.createElement('img');
+    img.src = photo.url;
+    gallery.appendChild(img);
+});
