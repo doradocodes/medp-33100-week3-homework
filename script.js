@@ -49,23 +49,23 @@ const photos = [
     },
 ];
 
-//select gallery
-function displayPhotos(type){
-    const gallery = document.getElementById('gallery');
 
+//filter by type
+function displayFilteredPhotos(type){
+    const gallery = document.getElementById('gallery');
+    gallery.innerHTML = '';
     type.forEach(photo =>{
     const img = document.createElement('img');
     img.src = photo.url;
     gallery.appendChild(img);
-});
+    });
 }
 
-//filter by type
 const nature = photos.filter(photo => photo.type === 'nature');
 const city = photos.filter(photo => photo.type === 'city');
 const animals = photos.filter(photo => photo.type === 'animals');
 
-displayPhotos(nature);
-displayPhotos(city);
-displayPhotos(animals);
 
+document.getElementById('nature').addEventListener('click', () => displayFilteredPhotos(nature));
+document.getElementById('city').addEventListener('click', () => displayFilteredPhotos(city));
+document.getElementById('animals').addEventListener('click', () => displayFilteredPhotos(animals));
