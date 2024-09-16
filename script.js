@@ -81,9 +81,9 @@ function displayPhotos(photosToDisplay) {
     const end = start + photosPerPage;
     
     // Add into array
-    const photosToShow = photosToDisplay.slice(start, end);
+    const displayEach = photosToDisplay.slice(start, end);
 
-    photosToShow.forEach(photo => {
+    displayEach.forEach(photo => {
         const imgElement = document.createElement('img');
         imgElement.src = photo.url;
         gallery.appendChild(imgElement);
