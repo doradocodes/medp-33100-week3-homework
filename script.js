@@ -48,7 +48,7 @@ const photos = [
         type: 'animals',
     },
     {
-        url: 'cat.jpg',
+        url: '/medp-33100-week3-homework/cat.JPG',
         type: 'animals',
     },
     
