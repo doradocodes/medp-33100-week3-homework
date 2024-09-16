@@ -48,7 +48,7 @@ const photos = [
         type: 'animals',
     },
     {
-        url: 'cat.jpg',
+        url: 'cat.JPG',
         type: 'animals',
     },
     
