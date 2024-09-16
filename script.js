@@ -50,10 +50,15 @@ const photos = [
 ];
 
 const section = document.getElementById('gallery');
-function loadPhotos(){
+function loadPhotos(gallery){
+    for (let i = 0; i < gallery.length; i++) {
+        let image = new Image();
+        image.src = gallery[i].url;
+        section.appendChild(image);
+    }
     console.log('photos loaded');
 }
 
-section.addEventListener('load',loadPhotos());
+section.addEventListener('load',loadPhotos(photos));
 
 console.log('hello');
