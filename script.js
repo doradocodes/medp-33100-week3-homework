@@ -49,4 +49,11 @@ const photos = [
     },
 ];
 
+const section = document.getElementById('gallery');
+function loadPhotos(){
+    console.log('photos loaded');
+}
+
+section.addEventListener('load',loadPhotos());
+
 console.log('hello');
