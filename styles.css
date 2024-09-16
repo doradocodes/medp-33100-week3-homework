@@ -38,6 +38,8 @@ h1 {
 }
 
 .gallery {
+    max-width: 90%;
+    margin: 0 auto;
     display: grid;
     justify-content: center;
     grid-template-columns: 1fr 1fr 1fr;
@@ -68,6 +70,8 @@ h1 {
 }
 
 .load-more {
+    display: flex;
+    justify-content: center;
     margin-top: 20px;
 }
 
