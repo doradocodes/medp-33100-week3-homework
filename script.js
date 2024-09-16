@@ -53,28 +53,24 @@ const loadMoreBtn = document.getElementById('loadMore');
 let currentIndex = 0;
 const photosPerLoad = 6;
 
-
 function renderPhotos(filterType = 'all', limit = true) {
     gallery.innerHTML = '';
     let filteredPhotos = filterType === 'all' ? photos : photos.filter(photo => photo.type === filterType);
 
-    if (limit) {
-        filteredPhotos = filteredPhotos.slice(0, currentIndex + photosPerLoad);
-    }
-
-    filteredPhotos.forEach(photo => {
+    const photosToShow = limit ? filteredPhotos.slice(0, currentIndex + photosPerLoad) : filteredPhotos;
+    
+    photosToShow.forEach(photo => {
         const img = document.createElement('img');
         img.src = photo.url;
         gallery.appendChild(img);
     });
-
-    if (filteredPhotos.length <= currentIndex + photosPerLoad) {
-        loadMoreBtn.style.display = 'none';
-    } else {
+    
+    if (filteredPhotos.length > photosToShow.length) {
         loadMoreBtn.style.display = 'block';
+    } else {
+        loadMoreBtn.style.display = 'none';
     }
 }
-
 
 loadMoreBtn.addEventListener('click', () => {
     currentIndex += photosPerLoad;
