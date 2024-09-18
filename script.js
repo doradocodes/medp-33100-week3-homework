@@ -50,15 +50,33 @@ const photos = [
 ];
 
 const section = document.getElementById('gallery');
-function loadPhotos(gallery){
-    for (let i = 0; i < gallery.length; i++) {
+const more_photos = document.querySelector('#loadMore');
+let photo_counter = 0;
+let total_photos_loaded = 0;
+
+function loadFirstPhotos(gallery){
+    for (let i = 0; i < 6; i++) {
         let image = new Image();
         image.src = gallery[i].url;
         section.appendChild(image);
+        photo_counter++;
     }
-    console.log('photos loaded');
+    total_photos_loaded = 6;
+    console.log('first 6 photos loaded');
+    console.log(photo_counter);
 }
 
-section.addEventListener('load',loadPhotos(photos));
+function morePhotos(gallery){
+    for (let j = total_photos_loaded+1 ; j < total_photos_loaded+6; j++) {
+        let image = new Image();
+        image.src = gallery[j].url;
+        section.appendChild(image);
+        photo_counter++;
+    }
+    total_photos_loaded = total_photos_loaded+6;
+    console.log('6 more photos loaded');
+    console.log(photo_counter);
+}
 
-console.log('hello');
+section.addEventListener("load", loadFirstPhotos(photos));
+more_photos.addEventListener("click", function photo(){morePhotos(photos)});
