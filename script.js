@@ -49,4 +49,81 @@ const photos = [
     },
 ];
 
-console.log('hello');
+const section = document.getElementById('gallery');
+const more_photos = document.getElementById('loadMore');
+// filter buttons
+const allButton = document.getElementById('all');
+const cityButton = document.getElementById('city');
+const natureButton = document.getElementById('nature');
+const animalButton = document.getElementById('animals');
+//filer classes
+const all_photos = document.getElementsByClassName('all');
+const city_photos = document.getElementsByClassName('city');
+const nature_photos = document.getElementsByClassName('nature');
+const animal_photos = document.getElementsByClassName('animals');
+// photo counter
+let total_photos_loaded = 0;
+
+function loadFirstPhotos(gallery){
+    for (let i = 0; i < 6; i++) {
+        let image = new Image();
+        image.src = gallery[i].url;
+        section.appendChild(image);
+        image.classList.add(gallery[i].type);
+        image.classList.add('all');
+    }
+    total_photos_loaded = 6;
+    console.log('first 6 photos loaded');
+};
+
+function morePhotos(gallery){
+    for (let j = total_photos_loaded+1 ; j < total_photos_loaded+6; j++) {
+        let image = new Image();
+        image.src = gallery[j].url;
+        section.appendChild(image);
+        image.classList.add(gallery[j].type);
+        image.classList.add('all');
+    }
+    total_photos_loaded = total_photos_loaded+6;
+    console.log('6 more photos loaded');
+};
+
+
+function filterPhotos(keyword){
+    for (let l = 0; l < all_photos.length; l++) {
+        all_photos[l].style.display = 'none';
+    };
+    switch (keyword) {
+        case 'city':
+            for (let c = 0; c < city_photos.length; c++) {
+                city_photos[c].style.display = 'inline-block';
+            };
+            break;
+        case 'animals':
+            for (let a = 0; a < animal_photos.length; a++) {
+                animal_photos[a].style.display = 'inline-block';
+            };
+            break;
+        case 'nature':
+            for (let n = 0; n < nature_photos.length; n++) {;
+                nature_photos[n].style.display = 'inline-block';
+            };
+            break;
+        default:
+            break;
+    };
+};
+
+
+function showAllPhotos(){
+    for (let l = 0; l < all_photos.length; l++) {
+        all_photos[l].style.display = 'inline-block';
+    };
+};
+
+section.addEventListener("load", loadFirstPhotos(photos));
+more_photos.addEventListener("click", function photo(){morePhotos(photos)});
+cityButton.addEventListener("click", function filter(){filterPhotos('city')});
+natureButton.addEventListener("click", function filter(){filterPhotos('nature')});
+animalButton.addEventListener("click", function filter(){filterPhotos('animals')});
+allButton.addEventListener('click', function all(){showAllPhotos()});
