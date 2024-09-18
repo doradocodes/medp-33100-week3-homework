@@ -90,39 +90,30 @@ function morePhotos(gallery){
 
 
 function filterPhotos(keyword){
-    if (keyword == 'city'){
-        for (let a = 0; a < animal_photos.length; a++) {
-            animal_photos[a].style.display = 'none';
-        };
-        for (let n = 0; n < nature_photos.length; n++) {;
-            nature_photos[n].style.display = 'none';
-        };
-        for (let c = 0; c < city_photos.length; c++) {
-            city_photos[c].style.display = 'inline-block';
-            
-        };
-    } else if (keyword == 'animals') {
-        for (let a = 0; a < animal_photos.length; a++) {
-            animal_photos[a].style.display = 'inline-block';
-        };
-        for (let n = 0; n < nature_photos.length; n++) {;
-            nature_photos[n].style.display = 'none';
-        };
-        for (let c = 0; c < city_photos.length; c++) {
-            city_photos[c].style.display = 'none';
-        };
-    } else if (keyword == 'nature') {
-        for (let a = 0; a < animal_photos.length; a++) {
-            animal_photos[a].style.display = 'none';
-        };
-        for (let n = 0; n < nature_photos.length; n++) {;
-            nature_photos[n].style.display = 'inline-block';
-        };
-        for (let c = 0; c < city_photos.length; c++) {
-            city_photos[c].style.display = 'none';
-        };
+    for (let l = 0; l < all_photos.length; l++) {
+        all_photos[l].style.display = 'none';
+    };
+    switch (keyword) {
+        case 'city':
+            for (let c = 0; c < city_photos.length; c++) {
+                city_photos[c].style.display = 'inline-block';
+            };
+            break;
+        case 'animals':
+            for (let a = 0; a < animal_photos.length; a++) {
+                animal_photos[a].style.display = 'inline-block';
+            };
+            break;
+        case 'nature':
+            for (let n = 0; n < nature_photos.length; n++) {;
+                nature_photos[n].style.display = 'inline-block';
+            };
+            break;
+        default:
+            break;
     };
 };
+
 
 function showAllPhotos(){
     for (let l = 0; l < all_photos.length; l++) {
