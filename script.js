@@ -91,7 +91,7 @@ function displayPhotos(photos) {
 
     // Hide the Load More button if no more photos
     if (end >= photos.length) {
-        load_moreBtn.style.display = 'invisible';
+        load_moreBtn.style.display = 'none';
     }
     else {
         load_moreBtn.style.display = 'visible';
@@ -99,20 +99,20 @@ function displayPhotos(photos) {
 }
 
 // Check for correct photo type
-function filterPhotos(filter) {
+function filterPhotos(type) {
     pageNumber = 0;
     photosPerPage = 6;
     let filteredPhotos = [];
 
     // Add filtered photos into empty array
-    if (filter === 'all') {
+    if (type === 'all') {
         filteredPhotos = photos;
     } 
     else {
         filteredPhotos = photos.filter(photo => photo.type === type);
     }
 
-    currentFilter = filter;
+    currentFilter = type;
     
     // Reset the gallery and display photos
     gallery.innerHTML = '';
