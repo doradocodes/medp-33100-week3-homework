@@ -60,10 +60,14 @@ let animalButton = document.querySelector("#animals");
 
 let loadImage = document.querySelector("#loadMore");
 let limit = 0;
+let count = 6;
+let filteredImages = [];
+
 
 const images = (imgType) => {
-
-    let filteredImages = [];
+    limit = 0;
+    count = 6;
+    filteredImages = [];
     gallerySpace.innerHTML = "";
 
     if (imgType == "all"){
@@ -86,15 +90,27 @@ const images = (imgType) => {
                 limit += 6;
                 for (let img = 0 + limit; img < 6 + limit; img++){
                     gallerySpace.innerHTML += `<img src=${filteredImages[img].url}>`;
+                    count += 1;
                 }
-            } 
+            }
+            if(count >= filteredImages.length){
+                loadImage.style.visibility = "hidden";
+            }
         });
     }else{
         filteredImages.forEach((imgs) => {
             gallerySpace.innerHTML += `<img src=${imgs.url}>`;
         });
     }
+
+    if(count < filteredImages.length){
+        loadImage.style.visibility = "visible";
+    }else{
+        loadImage.style.visibility = "hidden";
+    }
 }
+
+images("all");
 
 allButton.addEventListener("click", () => {
     images("all");
