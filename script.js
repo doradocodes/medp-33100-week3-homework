@@ -49,4 +49,91 @@ const photos = [
     },
 ];
 
-console.log('hello');
+let gallery = document.getElementById('gallery');
+let loadMoreBtn = document.querySelector('.load-more');
+let filterBtn = document.querySelectorAll('.filter-buttons button');
+
+let initialPhoto = 6;
+let selectFilter = 'initial';
+
+function displayPhoto() {
+
+    gallery.innerHTML = '';
+    
+    let filteredPhoto = [];
+    if (selectFilter == 'initial' || selectFilter == 'All') {
+        filteredPhoto = photos;
+    } 
+    else {
+        for (let i = 0; i < photos.length; i++) {
+            let photo = photos[i];
+
+            if (selectFilter == 'Nature' && photo.type == 'nature') {
+                filteredPhoto.push(photo);
+            }
+            else if (selectFilter == 'City' && photo.type == 'city') {
+                filteredPhoto.push(photo);
+            }
+            else if (selectFilter == 'Animals' && photo.type == 'animals') {
+                filteredPhoto.push(photo);
+            }
+        }
+    }
+
+    let totalPhoto;
+
+    if (selectFilter == 'All') {
+        totalPhoto = filteredPhoto.length;
+    }
+    else {
+        if (initialPhoto > filteredPhoto.length) {
+            totalPhoto = filteredPhoto.length;
+        }
+        else {
+            totalPhoto = initialPhoto;
+        }
+    }
+    
+    for (let i = 0; i < totalPhoto; i++) {
+        let img = document.createElement('img');
+        img.src = filteredPhoto[i].url;
+        gallery.appendChild(img);
+    }
+    
+    if (selectFilter == 'All' || initialPhoto >= filteredPhoto.length) {
+        loadMoreBtn.style.display = 'none';
+    } 
+    else {
+        loadMoreBtn.style.display = 'block';
+    }
+}
+
+loadMoreBtn.onclick = function() {
+    initialPhoto += 6;
+    displayPhoto();
+};
+
+filterBtn[0].onclick = function() {
+    selectFilter = 'All';
+    displayPhoto();
+};
+
+filterBtn[1].onclick = function() {
+    selectFilter = 'Nature';
+    initialPhoto = 6;
+    displayPhoto();
+};
+
+filterBtn[2].onclick = function() {
+    selectFilter = 'City';
+    initialPhoto = 6;
+    displayPhoto();
+};
+
+filterBtn[3].onclick = function() {
+    selectFilter = 'Animals';
+    initialPhoto = 6;
+    displayPhoto();
+};
+
+displayPhoto();
