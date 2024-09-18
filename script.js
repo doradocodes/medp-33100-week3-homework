@@ -47,6 +47,90 @@ const photos = [
         url: 'https://images.unsplash.com/photo-1535268647677-300dbf3d78d1?q=80&w=987&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
         type: 'animals',
     },
+    {
+        url: '/medp-33100-week3-homework/cat.JPG',
+        type: 'animals',
+    },
+    
 ];
 
 console.log('hello');
+
+const gallery = document.querySelector('#gallery');
+const load_moreBtn = document.querySelector('#load-more');
+const allBtn = document.querySelector('#all');
+const natureBtn = document.querySelector('#nature');
+const cityBtn = document.querySelector('#city');
+const animalsBtn = document.querySelector('#animals');
+
+let photosPerPage = 6;
+let pageNumber = 0;
+let currentFilter = 'all';
+
+load_moreBtn.addEventListener('click', loadMore);
+allBtn.addEventListener('click', () => filterPhotos('all'));
+natureBtn.addEventListener('click', () => filterPhotos('nature'));
+cityBtn.addEventListener('click', () => filterPhotos('city'));
+animalsBtn.addEventListener('click', () => filterPhotos('animals'));
+
+filterPhotos('all');
+
+// Calculate and display the correct amount of photos
+function displayPhotos(photos) {
+    const start = pageNumber * photosPerPage;
+    const end = start + photosPerPage;
+    
+    // Add into array
+    const displayEach = photos.slice(start, end);
+
+    displayEach.forEach(photo => {
+        const imgElement = document.createElement('img');
+        imgElement.src = photo.url;
+        gallery.appendChild(imgElement);
+    });
+
+    // Hide the Load More button if no more photos
+    if (end >= photos.length) {
+        load_moreBtn.style.display = 'none';
+    }
+    else {
+        load_moreBtn.style.display = 'inline-block';
+    }
+}
+
+// Check for correct photo type
+function filterPhotos(type) {
+    pageNumber = 0;
+    photosPerPage = 6;
+    let filteredPhotos = [];
+
+    // Add filtered photos into empty array
+    if (type === 'all') {
+        filteredPhotos = photos;
+    } 
+    else {
+        filteredPhotos = photos.filter(photo => photo.type === type);
+    }
+
+    currentFilter = type;
+    
+    // Reset the gallery and display photos
+    gallery.innerHTML = '';
+    displayPhotos(filteredPhotos);
+}
+
+// Increment page and display more photos
+function loadMore() {
+    pageNumber++;
+    let filteredPhotos = [];
+
+    // Add filtered type photos into empty array
+    if (currentFilter === 'all') {
+        filteredPhotos = photos;
+    } 
+    else {
+        filteredPhotos = photos.filter(photo => photo.type === currentFilter);
+    }
+
+    displayPhotos(filteredPhotos);
+}
