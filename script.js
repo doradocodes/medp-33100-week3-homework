@@ -49,4 +49,58 @@ const photos = [
     },
 ];
 
-console.log('hello');
+function getAllPhotos() {
+    const allImages = [];
+
+    for(let i = 0; i < 6; i++) {
+        allImages.push(photos[i]);
+    }
+
+    return allImages;
+}
+
+function getNaturePhotos() {
+    const natureImages = [];
+    const container = document.getElementById('gallery')
+
+    //Adds all nature photos to the natureImages array
+    for(let i = 0; i < photos.length; i++) {
+        if (photos[i].type == 'nature') {
+            natureImages.push(photos[i]);
+        } 
+    }
+
+    //create img tag within the html doc for each img in the natureImages array
+    for (let i = 0; i < natureImages.length; i++) {
+        const img = document.createElement('img');
+        img.src = photos[i].url;
+        container.appendChild(img);
+    }
+    return container
+
+}
+
+function getCityPhotos() {
+    const cityImages = [];
+
+    for(let i = 0; i < photos.length; i++) {
+        if (photos[i].type == 'city') {
+            cityImages.push(photos[i]);
+        } 
+    }
+}
+
+function getAnimalsPhotos() {
+    const animalImages = [];
+
+    for(let i = 0; i < photos.length; i++) {
+        if (photos[i].type == 'animals') {
+            animalImages.push(photos[i]);
+        } 
+    }
+}
+
+document.getElementById("all").addEventListener("click", getAllPhotos);
+document.getElementById("nature").addEventListener("click", getNaturePhotos);
+document.getElementById("city").addEventListener("click", getCityPhotos);
+document.getElementById("animals").addEventListener("click", getAnimalsPhotos);
