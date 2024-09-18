@@ -76,12 +76,12 @@ animalsBtn.addEventListener('click', () => filterPhotos('animals'));
 filterPhotos('all');
 
 // Calculate and display the correct amount of photos
-function displayPhotos(photosToDisplay) {
+function displayPhotos(photos) {
     const start = pageNumber * photosPerPage;
     const end = start + photosPerPage;
     
     // Add into array
-    const displayEach = photosToDisplay.slice(start, end);
+    const displayEach = photos.slice(start, end);
 
     displayEach.forEach(photo => {
         const imgElement = document.createElement('img');
@@ -90,39 +90,41 @@ function displayPhotos(photosToDisplay) {
     });
 
     // Hide the Load More button if no more photos
-    if (end >= photosToDisplay.length) {
-        load_moreBtn.style.display = 'none';
+    if (end >= photos.length) {
+        load_moreBtn.style.display = 'invisible';
     }
     else {
-        load_moreBtn.style.display = 'block';
+        load_moreBtn.style.display = 'visible';
     }
 }
 
 // Check for correct photo type
-function filterPhotos(type) {
+function filterPhotos(filter) {
     pageNumber = 0;
     photosPerPage = 6;
     let filteredPhotos = [];
 
-    if (type === 'all') {
+    // Add filtered photos into empty array
+    if (filter === 'all') {
         filteredPhotos = photos;
     } 
     else {
         filteredPhotos = photos.filter(photo => photo.type === type);
     }
 
-    currentFilter = type;
+    currentFilter = filter;
     
-    // Reset the gallery
+    // Reset the gallery and display photos
     gallery.innerHTML = '';
     displayPhotos(filteredPhotos);
 }
 
-// Increment Page andd display more photos
+// Increment page and display more photos
 function loadMore() {
     pageNumber++;
     let filteredPhotos = [];
 
+    // Add filtered type photos into empty array
     if (currentFilter === 'all') {
         filteredPhotos = photos;
     } 
