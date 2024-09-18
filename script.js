@@ -94,7 +94,7 @@ function displayPhotos(photos) {
         load_moreBtn.style.display = 'none';
     }
     else {
-        load_moreBtn.style.display = 'visible';
+        load_moreBtn.style.display = 'inline-block';
     }
 }
 
