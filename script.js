@@ -50,3 +50,79 @@ const photos = [
 ];
 
 console.log('hello');
+
+const gallery = document.getElementById("gallery");
+
+window.onload = loadImages;
+
+var loadMore_button = document.getElementById("loadMore")
+loadMore_button.addEventListener("click", loadImages)
+let button_clicks = 1;
+
+var all_button = document.getElementById("all");
+all_button.addEventListener("click", loadAllImages);
+
+var nature_button = document.getElementById("nature");
+nature_button.addEventListener("click", loadNature)
+
+var city_button = document.getElementById("city");
+city_button.addEventListener("click", loadCity)
+
+var animal_button = document.getElementById("animals");
+animal_button.addEventListener("click", loadAnimals)
+
+function loadImages(){
+    clearGallery();
+    console.log(button_clicks);
+    for (let i = 0; i < (button_clicks * 6); i++){
+        addImageToGallery(i)
+    };
+    button_clicks = button_clicks + 1 ;
+};
+
+function loadAllImages(){
+    clearGallery();
+    for(let i = 0; i < photos.length; i++){
+        addImageToGallery(i)
+    };
+};
+
+function loadNature(){
+    clearGallery();
+    for(let i = 0; i < photos.length; i++){
+        if (photos[i].type == "nature"){
+            addImageToGallery(i)
+        }
+    };
+}
+
+function loadCity(){
+    clearGallery();
+    for(let i = 0; i < photos.length; i++){
+        if (photos[i].type == "city"){
+            addImageToGallery(i)
+        }
+    };
+}
+
+function loadAnimals(){
+    clearGallery();
+    for(let i = 0; i < photos.length; i++){
+        if (photos[i].type == "animals"){
+            addImageToGallery(i)
+        }
+    };
+}
+
+// Clear gallery. Help from Geeks for Geeks.
+function clearGallery(){
+    while (gallery.firstChild) {
+        gallery.removeChild(gallery.firstChild);
+    }
+}
+
+function addImageToGallery(i){
+    let image = document.createElement("img");
+    image.src = photos[i].url
+    gallery.appendChild(image);
+}
