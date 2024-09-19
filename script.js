@@ -136,3 +136,5 @@ natureBtn.addEventListener("click", getNaturePhotos);
 cityBtn.addEventListener("click", getCityPhotos);
 animalBtn.addEventListener("click", getAnimalsPhotos);
 loadImgBtn.addEventListener("click", loadPhotos);
+
+getAllPhotos();
