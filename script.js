@@ -54,9 +54,7 @@ let photoIndex = 0;
 function displayPhotos(){
     
     const gallery = document.getElementById('gallery');
-    
     const display = photos.slice(photoIndex, photoIndex + 6);
-
     display.forEach(photo =>{
         const img = document.createElement('img');
         img.src = photo.url;
@@ -83,9 +81,14 @@ const city = photos.filter(photo => photo.type === 'city');
 const animals = photos.filter(photo => photo.type === 'animals');
 
 displayPhotos();
+
 document.getElementById('all').addEventListener('click', () => {
     photoIndex = 0;
     gallery.innerHTML = '';
+    displayPhotos();
+});
+
+document.getElementById('loadMore').addEventListener('click', () =>{
     displayPhotos();
 });
 document.getElementById('nature').addEventListener('click', () => displayFilteredPhotos(nature));
