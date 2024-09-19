@@ -48,4 +48,4 @@ const photos = [
         type: 'animals',
     },
 ];
-console.log("Yo, what's poppin?")
+console.log("This is a test.")
