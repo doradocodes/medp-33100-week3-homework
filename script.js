@@ -49,4 +49,3 @@ const photos = [
     },
 ];
 
-console.log('hello');
