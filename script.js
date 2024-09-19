@@ -48,5 +48,55 @@ const photos = [
         type: 'animals',
     },
 ];
+const gallery = document.getElementById('gallery');
+const loadMoreBtn = document.getElementById('loadMore');
+let currentIndex = 0;
+const photosPerLoad = 6;
 
-console.log('hello');
+function renderPhotos(filterType = 'all', limit = true) {
+    gallery.innerHTML = '';
+    let filteredPhotos = filterType === 'all' ? photos : photos.filter(photo => photo.type === filterType);
+
+    const photosToShow = limit ? filteredPhotos.slice(0, currentIndex + photosPerLoad) : filteredPhotos;
+    
+    photosToShow.forEach(photo => {
+        const img = document.createElement('img');
+        img.src = photo.url;
+        gallery.appendChild(img);
+    });
+    
+    if (filteredPhotos.length > photosToShow.length) {
+        loadMoreBtn.style.display = 'block';
+    } else {
+        loadMoreBtn.style.display = 'none';
+    }
+}
+
+loadMoreBtn.addEventListener('click', () => {
+    currentIndex += photosPerLoad;
+    renderPhotos('all', true);
+});
+
+
+document.getElementById('all').addEventListener('click', () => {
+    currentIndex = 0;
+    renderPhotos('all');
+});
+
+document.getElementById('nature').addEventListener('click', () => {
+    currentIndex = 0;
+    renderPhotos('nature');
+});
+
+document.getElementById('city').addEventListener('click', () => {
+    currentIndex = 0;
+    renderPhotos('city');
+});
+
+document.getElementById('animals').addEventListener('click', () => {
+    currentIndex = 0;
+    renderPhotos('animals');
+});
+
+
+renderPhotos('all', true);
