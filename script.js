@@ -50,6 +50,7 @@ const photos = [
 ];
 
 let num = 5;
+let activeFilter = 'all';
 
 function getImages() {
   const gallery = document.getElementById('gallery');
@@ -67,11 +68,14 @@ function getImages() {
 }
 
 function getAll() {
+  activeFilter = 'all';
   const allImages = document.querySelectorAll('img');
 
+  let shownImages = 0;
   for (let i = 0; i < allImages.length; i++) {
-    if (i <= num) {
+    if (shownImages <= num) {
       allImages[i].style.display = 'block';
+      shownImages++;
     } else {
       allImages[i].style.display = 'none';
     }
@@ -79,20 +83,27 @@ function getAll() {
 }
 
 function getEach(buttonName) {
+  activeFilter = buttonName;
   const allImages = document.querySelectorAll('img');
+  let shownImages = 0;
 
-  allImages.forEach((images) => {
-    if (images.className === buttonName) {
-      images.style.display = 'block';
+  allImages.forEach((image) => {
+    if (image.className === buttonName && shownImages <= num) {
+      image.style.display = 'block';
+      shownImages++;
     } else {
-      images.style.display = 'none';
+      image.style.display = 'none';
     }
   });
 }
 
 function showMore() {
   num = num + 6;
-  getAll();
+  if (activeFilter === 'all') {
+    getAll();
+  } else {
+    getEach(activeFilter);
+  }
 }
 
 function show() {
@@ -105,24 +116,27 @@ function show() {
   getImages();
 
   all.addEventListener('click', () => {
+    num = 5;
     getAll();
   });
 
   nature.addEventListener('click', () => {
+    num = 5;
     getEach(nature.id);
   });
 
   city.addEventListener('click', () => {
+    num = 5;
     getEach(city.id);
   });
 
   animal.addEventListener('click', () => {
+    num = 5;
     getEach(animal.id);
   });
 
   loadMore.addEventListener('click', () => {
     showMore();
-    num = 5;
   });
 }
 
