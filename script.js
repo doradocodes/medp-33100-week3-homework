@@ -48,4 +48,4 @@ const photos = [
         type: 'animals',
     },
 ];
-console.log("This is a test.")
+console.log("I want to push a line.")
