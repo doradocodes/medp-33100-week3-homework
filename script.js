@@ -48,5 +48,93 @@ const photos = [
         type: 'animals',
     },
 ];
+let gallery = document.querySelector("#gallery");
 
-console.log('hello');
+let allBtn = document.querySelector("#all");
+let natureBtn = document.querySelector("#nature");
+let cityBtn = document.querySelector("#city");
+let animalBtn = document.querySelector("#animals");
+let loadImgBtn = document.querySelector("#loadMore");
+
+let img = document.createElement('img');
+let container = document.getElementById('gallery')
+let allImages = [];
+
+function reset() {
+    gallery.innerHTML = '';
+    container.innterHTML = '';
+}
+function getAllPhotos() {
+    reset();
+    for (let i = 0; i < 6; i++) {
+        allImages.push(photos[i]);
+        img = document.createElement('img');
+        img.src = photos[i].url;
+        container.appendChild(img);
+    }
+}
+
+function loadPhotos() {
+    for (let i = 6; i < photos.length; i++) {
+        allImages.push(photos[i]);
+        img = document.createElement('img');
+        img.src = photos[i].url;
+        container.appendChild(img);
+    }
+}
+
+function getNaturePhotos() {
+    reset();
+    const natureImages = [];
+    container = document.getElementById('gallery');
+
+    for (let i = 0; i < photos.length; i++) {
+        if (photos[i].type == 'nature') {
+            natureImages.push(photos[i]);
+        }
+    }
+
+    for (let i = 0; i < natureImages.length; i++) {
+        img = document.createElement('img');
+        img.src = photos[i].url;
+        container.appendChild(img);
+    }
+}
+
+function getCityPhotos() {
+    reset();
+    const cityImages = [];
+    container = document.getElementById('gallery');
+
+    for (let i = 0; i < photos.length; i++) {
+        if (photos[i].type == 'city') {
+            cityImages.push(photos[i]);
+            img = document.createElement('img');
+            img.src = photos[i].url;
+            container.appendChild(img);
+        }
+    }
+}
+
+function getAnimalsPhotos() {
+    reset();
+    const animalImages = [];
+    container = document.getElementById('gallery');
+
+    for (let i = 0; i < photos.length; i++) {
+        if (photos[i].type == 'animals') {
+            animalImages.push(photos[i]);
+            img = document.createElement('img');
+            img.src = photos[i].url;
+            container.appendChild(img);
+        }
+    }
+}
+
+allBtn.addEventListener("click", getAllPhotos);
+natureBtn.addEventListener("click", getNaturePhotos);
+cityBtn.addEventListener("click", getCityPhotos);
+animalBtn.addEventListener("click", getAnimalsPhotos);
+loadImgBtn.addEventListener("click", loadPhotos);
+
+getAllPhotos();
