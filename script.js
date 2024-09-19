@@ -49,12 +49,12 @@ const photos = [
     },
 ];
 
-
+let photoIndex = 0;
 
 function displayPhotos(){
-    let photoIndex = 0;
+    
     const gallery = document.getElementById('gallery');
-    gallery.innerHTML = '';
+    
     const display = photos.slice(photoIndex, photoIndex + 6);
 
     display.forEach(photo =>{
@@ -83,7 +83,11 @@ const city = photos.filter(photo => photo.type === 'city');
 const animals = photos.filter(photo => photo.type === 'animals');
 
 displayPhotos();
-document.getElementById('all').addEventListener('click', () => displayPhotos());
+document.getElementById('all').addEventListener('click', () => {
+    photoIndex = 0;
+    gallery.innerHTML = '';
+    displayPhotos();
+});
 document.getElementById('nature').addEventListener('click', () => displayFilteredPhotos(nature));
 document.getElementById('city').addEventListener('click', () => displayFilteredPhotos(city));
 document.getElementById('animals').addEventListener('click', () => displayFilteredPhotos(animals));
