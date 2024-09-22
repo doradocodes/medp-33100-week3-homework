@@ -47,6 +47,78 @@ const photos = [
         url: 'https://images.unsplash.com/photo-1535268647677-300dbf3d78d1?q=80&w=987&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
         type: 'animals',
     },
+    {
+        url: 'https://media.istockphoto.com/id/1154370446/photo/funny-raccoon-in-green-sunglasses-showing-a-rock-gesture-isolated-on-white-background.jpg?s=612x612&w=0&k=20&c=kkZiaB9Q-GbY5gjf6WWURzEpLzNrpjZp_tn09GB21bI=',
+        type: 'animals',
+    },
+    {
+        url: 'https://cdn.pixabay.com/photo/2014/10/01/10/44/animal-468228_640.jpg',
+        type: 'animals',
+    },
 ];
 
-console.log('hello');
+// Week_3_Work
+const gallery = document.querySelector('.gallery'); //selecting the gallery section using its class
+const buttons = document.querySelectorAll('.filter-buttons button');
+let activePhotoCount = 6;
+const loadMoreButton = document.querySelector('#loadMore');
+
+//go through photos array 
+photos.forEach((photo) => {
+    const imgEl = document.createElement('img');
+    imgEl.src = photo.url
+    imgEl.classList.add(photo.type, 'photo');
+    imgEl.style.display = 'none';
+    
+    gallery.appendChild(imgEl);
+});
+
+const allPhotos = document.querySelectorAll('.photo')
+const allPhotosArray = [...allPhotos];
+
+allPhotosArray.slice(0, activePhotoCount).forEach(photo => {
+    photo.style.display = 'block';
+});
+
+function showInitialPhotos() {
+    allPhotosArray.forEach(photo => photo.style.display = 'none');
+    allPhotosArray.slice(0, activePhotoCount).forEach(photo => {
+        photo.style.display = 'block'; 
+    });
+}
+
+// Initial load of photos
+showInitialPhotos();
+
+
+loadMoreButton.addEventListener('click', () => {
+    activePhotoCount +=6;
+    allPhotosArray.slice(0, activePhotoCount).forEach(photo => {
+        photo.style.display = 'block';
+    });
+    if (activePhotoCount >= allPhotosArray.length) {
+        loadMoreButton.style.display = 'none';
+    }
+});
+
+buttons.forEach((button) => {
+    button.addEventListener('click', (event) => {
+        const type = event.target.id;
+        const filteredPhotos = type === 'all' 
+            ? allPhotosArray 
+            : allPhotosArray.filter(photo => photo.classList.contains(type));
+
+        //Resetting
+        activePhotoCount = 6;
+        gallery.innerHTML = '';
+
+        filteredPhotos.slice(0, activePhotoCount).forEach(photo => {
+            gallery.appendChild(photo); 
+            photo.style.display = 'block';
+        });
+
+        loadMoreButton.style.display = filteredPhotos.length > activePhotoCount ? 'block' : 'none';
+        
+        activePhotoCount = 6;
+    });
+});
